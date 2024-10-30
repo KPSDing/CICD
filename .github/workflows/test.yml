@@ -12,7 +12,7 @@ jobs:
   build: 
 # what runner
     runs-on: ubuntu-latest
-	# group steps together
+# group steps together
     steps:
     # $#{{ }} is a way to access the context of the workflow
     - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
