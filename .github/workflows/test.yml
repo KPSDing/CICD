@@ -1,0 +1,34 @@
+# name of the workflow
+name: GitHub Actions Demo
+# description
+run-name: Testing out GitHub Actions
+# events to trigger this workflow
+# important: push and pull_request are the most common
+on: [push, pull_request]
+
+# groups all the jobs in this workflow
+jobs: 
+	# define job name
+  build: 
+	  # what runner
+    runs-on: ubuntu-latest
+		# group steps together
+    steps:
+    # $#{{ }} is a way to access the context of the workflow
+    - run: echo "The job was automatically triggered by a ${{ github.event_name }} event."
+    # use a pre-built action to check out the repository
+    - uses: actions/checkout@v4
+    # inhance the readability of the output
+    - name: Run a one-line script
+      run: echo "This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+    # use a pre-built action to print the repository info
+    - name: Print repository info
+      run: |
+        ls ${{ github.workspace }}
+        echo "This job's status is ${{ job.status }}."
+    # same the coding style
+    # - name: Super-linter
+    #- uses: super-linter/super-linter@v7.1.0 # x-release-please-version
+    #  - env:
+    #  # To report GitHub Actions status checks
+    #  GITHUB_TOKEN: $#{{ secrets.GITHUB_TOKEN }}
